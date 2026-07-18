@@ -1,0 +1,15 @@
+{
+  "name": "tradebet-keeper",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "TxLINE onboarding + live odds/scores keeper for TRADEBET",
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.32.1",
+    "@solana/spl-token": "^0.4.15",
+    "@solana/web3.js": "^1.98.4",
+    "axios": "^1.18.1",
+    "tsx": "^4.23.1",
+    "tweetnacl": "^1.0.3"
+  }
+}

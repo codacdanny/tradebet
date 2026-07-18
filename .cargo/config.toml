@@ -1,0 +1,5 @@
+# Solana's SBF compiler is Rust 1.79; many 2026-era crates bumped their MSRV to
+# 1.85 / edition2024. This makes Cargo's resolver prefer dependency versions that
+# are compatible with our pinned rust-version (1.79) instead of the newest ones.
+[resolver]
+incompatible-rust-versions = "fallback"

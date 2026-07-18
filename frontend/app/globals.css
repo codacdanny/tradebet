@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ *
+ * TRADEBET design tokens (dark-first — this product is dark by design)
+ * See /brand.md for the source of truth.
+ * ------------------------------------------------------------------ */
+@theme {
+  /* Surfaces */
+  --color-background: #06080a;
+  --color-surface: #0d1218;
+  --color-elevated: #141b23;
+  --color-border: #1e2831;
+  --color-border-strong: #2a3742;
+
+  /* Text */
+  --color-foreground: #e9eff3;
+  --color-muted: #8b99a7;
+  --color-faint: #55636f;
+
+  /* Signal colors */
+  --color-long: #39ff88; /* brand / up / profit */
+  --color-long-solid: #1fd873; /* readable solid button fill */
+  --color-short: #ff3d6e; /* down / loss */
+  --color-accent: #38d6ff; /* data / glow / links */
+  --color-live: #ffc24b; /* LIVE dot / clock */
+
+  /* Type */
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  /* Radius */
+  --radius-card: 12px;
+  --radius-control: 9px;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-long) 30%, transparent);
+    color: var(--color-foreground);
+  }
+
+  /* Tabular, non-shifting numbers wherever we render live data */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+    font-family: var(--font-mono);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border-strong);
+    border-radius: 999px;
+    border: 3px solid var(--color-background);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #38454f;
+  }
+}
+
+@layer utilities {
+  /* Faint technical grid behind hero / panels */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, color-mix(in oklab, var(--color-border) 55%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklab, var(--color-border) 55%, transparent) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .glow-long {
+    box-shadow:
+      0 0 0 1px color-mix(in oklab, var(--color-long) 40%, transparent),
+      0 0 24px -4px color-mix(in oklab, var(--color-long) 55%, transparent);
+  }
+  .glow-accent {
+    box-shadow: 0 0 24px -6px color-mix(in oklab, var(--color-accent) 60%, transparent);
+  }
+  .text-glow-long {
+    text-shadow: 0 0 18px color-mix(in oklab, var(--color-long) 55%, transparent);
+  }
+
+  .brand-gradient {
+    background-image: linear-gradient(100deg, var(--color-long), var(--color-accent));
+  }
+  .brand-gradient-text {
+    background-image: linear-gradient(100deg, var(--color-long), var(--color-accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+@keyframes pulse-live {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.82); }
+}
+@keyframes flash-up {
+  0% { background-color: color-mix(in oklab, var(--color-long) 26%, transparent); }
+  100% { background-color: transparent; }
+}
+@keyframes flash-down {
+  0% { background-color: color-mix(in oklab, var(--color-short) 26%, transparent); }
+  100% { background-color: transparent; }
+}
+
+.animate-live-dot { animation: pulse-live 1.6s ease-in-out infinite; }
+.animate-flash-up { animation: flash-up 0.6s ease-out; }
+.animate-flash-down { animation: flash-down 0.6s ease-out; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-live-dot,
+  .animate-flash-up,
+  .animate-flash-down { animation: none !important; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

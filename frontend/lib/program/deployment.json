@@ -1,0 +1,21 @@
+{
+  "network": "devnet",
+  "rpc": "https://api.devnet.solana.com",
+  "programId": "DYpHFBX8yk77JAwEKkv53e8Ks7fJjB6wMChDm51oQvUB",
+  "usdcMint": "7hAubDUeJQxbrScPLKPVzHGiJsoRvCk4PaJxbMHaM3ku",
+  "usdcDecimals": 6,
+  "config": "2BuLqsX4VjYz5BKaExG6wFsKvAGGKNUypg8xiad9R8ps",
+  "vaultAuthority": "21GXvzb9kZhDjHbCahBnLokUZFENXAbZHncEbaiVpXPu",
+  "vaultTokenAccount": "GiEo9g5UQ1pSFcgZbxd6ScM6yXs4KiSgFTHo1oqKoN8r",
+  "oracleAuthority": "Derqsa3i4KWc4QSQ35u4EnyceYh3G61Q7Sq7uDMKX5dy",
+  "market": {
+    "fixtureId": "18237038",
+    "outcome": 0,
+    "pda": "8XsGkgAFytkvcixCVWqSTcqxLhgZJoZXtZGvmDC3UNgR",
+    "label": "France v Spain — France to win",
+    "home": "France",
+    "away": "Spain",
+    "homeCode": "FRA",
+    "awayCode": "ESP"
+  }
+}

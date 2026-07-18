@@ -1,0 +1,28 @@
+.anchor
+.DS_Store
+target
+**/*.rs.bk
+node_modules
+test-ledger
+.yarn
+
+# secrets / local config — NEVER commit
+.env
+.env.*
+!.env.example
+*-keypair.json
+**/credentials.json
+credentials.json
+wallets/
+
+# build artifacts
+.next
+**/.next
+app/.next
+app/out
+out
+dist
+
+# logs & runtime data
+*.log
+keeper/seen-fixtures.json
