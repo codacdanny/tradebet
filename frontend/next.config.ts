@@ -1,13 +1,16 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  // Repo root has a yarn.lock (Anchor workspace) alongside this app's lockfile;
-  // pin the bundler root to this app so module resolution is unambiguous.
-  // npm scripts run from this directory, so cwd is the frontend root.
-  turbopack: {
-    root: process.cwd(),
-  },
-  outputFileTracingRoot: process.cwd(),
-};
+// Locally the repo root has a yarn.lock (Anchor workspace) next to this app's
+// lockfile, which makes Next infer the wrong workspace root. Pin the bundler
+// root to this app — but ONLY locally. On Vercel the Root Directory is already
+// `frontend`, so overriding these paths misplaces the build output (.next).
+const isVercel = !!process.env.VERCEL;
+
+const nextConfig: NextConfig = isVercel
+  ? {}
+  : {
+      turbopack: { root: process.cwd() },
+      outputFileTracingRoot: process.cwd(),
+    };
 
 export default nextConfig;
