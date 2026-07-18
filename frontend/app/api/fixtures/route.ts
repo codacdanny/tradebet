@@ -84,12 +84,12 @@ async function fetchScore(creds: { jwt: string; apiToken: string }, fixtureId: s
     if (!Array.isArray(arr) || arr.length === 0) return null;
     const latest = arr.reduce((a, b) => (Number(b.Seq ?? 0) >= Number(a.Seq ?? 0) ? b : a));
     const clock = (latest.Clock ?? {}) as { Seconds?: number; Running?: boolean };
-    const score = (latest.Score ?? {}) as {
-      Participant1?: { Total?: Record<string, number> };
-      Participant2?: { Total?: Record<string, number> };
-    };
-    const home = sideOf(score.Participant1?.Total);
-    const away = sideOf(score.Participant2?.Total);
+    // Cumulative stats only increase; latest record can omit fields → take max across snapshot.
+    type Rec = { Score?: { Participant1?: { Total?: Record<string, number> }; Participant2?: { Total?: Record<string, number> } } };
+    const maxOf = (who: "Participant1" | "Participant2", field: string) =>
+      Math.max(0, ...arr.map((r) => Number((r as Rec).Score?.[who]?.Total?.[field] ?? 0)));
+    const home: Side = { goals: maxOf("Participant1", "Goals"), corners: maxOf("Participant1", "Corners"), yellow: maxOf("Participant1", "YellowCards"), red: maxOf("Participant1", "RedCards") };
+    const away: Side = { goals: maxOf("Participant2", "Goals"), corners: maxOf("Participant2", "Corners"), yellow: maxOf("Participant2", "YellowCards"), red: maxOf("Participant2", "RedCards") };
     if (!clock.Running && (clock.Seconds ?? 0) === 0 && home.goals + away.goals === 0) return null;
     return { running: Boolean(clock.Running), minute: Math.floor(Number(clock.Seconds ?? 0) / 60), home, away };
   } catch {

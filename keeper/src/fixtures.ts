@@ -81,8 +81,11 @@ export async function fetchLiveScore(host: string, creds: Creds, fixtureId: stri
     Participant2?: { Total?: { Goals?: number } };
   };
   const clockSeconds = Number(clock.Seconds ?? 0);
-  const p1Goals = Number(score.Participant1?.Total?.Goals ?? 0);
-  const p2Goals = Number(score.Participant2?.Total?.Goals ?? 0);
+  // Cumulative goals only increase; the latest record can omit them (possession /
+  // kickoff events) → take the max across the snapshot to avoid flicker.
+  type Rec = { Score?: { Participant1?: { Total?: { Goals?: number } }; Participant2?: { Total?: { Goals?: number } } } };
+  const p1Goals = Math.max(0, ...arr.map((r) => Number((r as Rec).Score?.Participant1?.Total?.Goals ?? 0)));
+  const p2Goals = Math.max(0, ...arr.map((r) => Number((r as Rec).Score?.Participant2?.Total?.Goals ?? 0)));
   const running = Boolean(clock.Running);
   // No live data yet (pre-match): don't treat 0-0 with a dead clock as live.
   if (!running && clockSeconds === 0 && p1Goals + p2Goals === 0) return null;
