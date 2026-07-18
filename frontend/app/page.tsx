@@ -44,7 +44,7 @@ export default function Home() {
 
             <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted [text-shadow:0_1px_16px_rgba(6,8,10,0.95)]">
               Every team&apos;s chance of winning is a live price. Go long, go short, and
-              cash out any second during the 90 — priced by professional odds, settled
+              cash out any second during the 90mins — priced by professional odds, settled
               on-chain.
             </p>
 
