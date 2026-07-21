@@ -10,7 +10,6 @@ Settlement** track.
 - 🌐 **Live app:** https://the-tradebet-beta.vercel.app
 - 🎬 **Demo video:** https://drive.google.com/file/d/14AvNvhb5R1oOIBbWa6fe-kxBK25CZHy1/view?usp=drivesdk
 - 🐦 **X post:** https://x.com/codacdanny/status/2078746017868976233
-- ⛓️ **Program (Solana devnet):** [`DYpHFBX8yk77JAwEKkv53e8Ks7fJjB6wMChDm51oQvUB`](https://explorer.solana.com/address/DYpHFBX8yk77JAwEKkv53e8Ks7fJjB6wMChDm51oQvUB?cluster=devnet)
 
 ---
 
