@@ -88,29 +88,5 @@ npm install
 npm run build && npm run start       # http://localhost:3000
 ```
 
-## Deploying (Vercel)
-
-Set these environment variables (the keeper files are git-ignored secrets):
-
-| Env var | Purpose |
-|---|---|
-| `TXLINE_JWT`, `TXLINE_API_TOKEN` | TxODDS credentials (from `keeper/credentials.json` after onboarding) — powers live fixtures/scores |
-| `FAUCET_SECRET_KEY` | Keeper secret key JSON array — powers the test-USDC faucet + market creation |
-| `SOLANA_RPC_URL` | (optional) a devnet RPC, e.g. a Helius URL, to avoid public-RPC rate limits |
-
-> The live-pricing **oracle** (`keeper/src/oracle.ts`) is a long-running process — run it on any
-> host to move the on-chain price. The `/demo` page shows the full live experience with no
-> dependencies.
-
-## Deployed devnet addresses
-
-| | |
-|---|---|
-| Program | `DYpHFBX8yk77JAwEKkv53e8Ks7fJjB6wMChDm51oQvUB` |
-| Mock USDC mint | `7hAubDUeJQxbrScPLKPVzHGiJsoRvCk4PaJxbMHaM3ku` |
-| Config PDA | `2BuLqsX4VjYz5BKaExG6wFsKvAGGKNUypg8xiad9R8ps` |
-| Vault | `GiEo9g5UQ1pSFcgZbxd6ScM6yXs4KiSgFTHo1oqKoN8r` (250k USDC liquidity) |
-
----
 
 Built with Anchor, Next.js, TxODDS TxLINE, and Solana.
